@@ -1,5 +1,7 @@
 package com.company;
 
+import java.util.ArrayList;
+
 public class Main {
 
     public static void main(String[] args) {
@@ -8,36 +10,37 @@ public class Main {
         System.out.println(isogram("aaBbl1"));
         System.out.println(isogram("aaB2223bll"));
         System.out.println(isogram("a/ab.-1blalbl"));
-        System.out.println("");
+        System.out.println(isogram(""));
+        System.out.println(isogram(null));
     }
 
     public static boolean isogram(String string) {
-        if (string.length()==0){
+        if (string == null || string.length() == 0) {
             return false;
         }
         string = string.toUpperCase();
-        char[] lettersToString = new char[0];
+        ArrayList<Character> lettersToString1 = new ArrayList<>();
         for (int i = 0; i < string.length(); i++) {
             if (Character.isLetter(string.charAt(i))) {
-                lettersToString = addChar(lettersToString,string.charAt(i));
+                lettersToString1.add(string.charAt(i));
             }
         }
-        int[] lettersToStringNumb = new int[lettersToString.length];
-        for (int i = 0; i < lettersToString.length; i++) {
-            lettersToStringNumb[i] = howMuch(lettersToString, lettersToString[i]);
+        ArrayList<Integer> lettersToStringNumb1 = new ArrayList<>();
+        for (int i = 0; i < lettersToString1.size(); i++) {
+            lettersToStringNumb1.add(howMuch(lettersToString1, lettersToString1.get(i)));
         }
-        for (int i = 0; i < lettersToStringNumb.length; i++) {
-            if (lettersToStringNumb[0] != lettersToStringNumb[i]) {
+        for (int i = 0; i < lettersToStringNumb1.size(); i++) {
+            if (lettersToStringNumb1.get(0) != lettersToStringNumb1.get(i)) {
                 return false;
             }
         }
         return true;
     }
 
-    public static int howMuch(char[] letters, char letter) {
+    public static int howMuch(ArrayList<Character> arrayList, char letter) {
         int counter = 0;
-        for (int i = 0; i < letters.length; i++) {
-            if (letters[i] == letter) {
+        for (int i = 0; i < arrayList.size(); i++) {
+            if (arrayList.get(i) == letter) {
                 counter++;
             }
         }
